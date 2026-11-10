@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EstateFlow</title>
+<meta name="description" content="Local property agent helping buyers find the right home and sellers get the right price. Tell me what you need — viewings, shortlists, valuations, all direct.">
+<!-- Open Graph / Social Preview -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EstateFlow">
+<meta property="og:title" content="EstateFlow — Estate Agent Websites That Capture Real Leads">
+<meta property="og:description" content="A live demo of the real estate websites I build. Every tool sends a real WhatsApp message straight to the agent — no signups, no fake inbox.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="EstateFlow — a real estate website built by Arham Raza">
+
+<!-- Twitter / X Preview -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EstateFlow — Estate Agent Websites That Capture Real Leads">
+<meta name="twitter:description" content="A live demo of the real estate websites I build. Every tool sends a real WhatsApp message straight to the agent.">
+<meta name="twitter:image" content="https://your-demo.vercel.app/og-image.png">
+
+<meta name="theme-color" content="#0A0B0E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A0B0E'/><rect x='1.5' y='1.5' width='29' height='29' rx='6.5' fill='none' stroke='%23D4B483' stroke-width='1.2' stroke-opacity='0.35'/><path d='M16 6l9 7v12a1 1 0 0 1-1 1h-5v-8h-6v8H8a1 1 0 0 1-1-1V13z' fill='%23D4B483'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================
+   ESTATEFLOW — AGENT'S PERSONAL SITE
+   PALETTE: AURUM GLASS
+========================================= */
+:root {
+  --bg: #0A0B0E;
+  --card: rgba(255, 255, 255, 0.035);
+  --card-hover: rgba(255, 255, 255, 0.065);
+  --border: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --text: #F5F3EE;
+  --muted: #9A968C;
+  --muted-2: #6F6B62;
+  --gold: #D4B483;
+  --gold-soft: #E8D4B0;
+  --gold-glow: rgba(212, 180, 131, 0.28);
+  --green: #4ADE80;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --container: 1180px;
+  --font-display: "Manrope", -apple-system, sans-serif;
+  --font-body: "DM Sans", -apple-system, sans-serif;
+  --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--font-body);
+  line-height: 1.65; overflow-x: hidden; position: relative;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 68px;
+}
+::selection { background: var(--gold); color: #0A0B0E; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+img { max-width: 100%; }
+
+.ambient-blob {
+  position: fixed; border-radius: 50%; filter: blur(150px);
+  pointer-events: none; z-index: 0; opacity: 0.5;
+  animation: floatBlob 22s ease-in-out infinite alternate;
+}
+.blob-1 { width: 520px; height: 520px; background: rgba(212, 180, 131, 0.14); top: 6%; left: -8%; }
+.blob-2 { width: 560px; height: 560px; background: rgba(201, 205, 212, 0.08); top: 48%; right: -10%; animation-delay: -7s; }
+.blob-3 { width: 440px; height: 440px; background: rgba(212, 180, 131, 0.10); bottom: 6%; left: 20%; animation-delay: -12s; }
+@keyframes floatBlob {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, -60px) scale(1.08); }
+  100% { transform: translate(-35px, 45px) scale(0.94); }
+}
+
+.container { width: min(var(--container), calc(100% - 48px)); margin: 0 auto; position: relative; z-index: 2; }
+.section { padding: 100px 0; position: relative; z-index: 2; }
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 9px; color: var(--gold);
+  font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+}
+.section-label::before { content: ""; width: 22px; height: 1px; background: var(--gold); }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.6vw, 44px);
+  font-weight: 800; letter-spacing: -1.4px; line-height: 1.18; margin-bottom: 16px;
+}
+.section-desc { color: var(--muted); max-width: 640px; font-size: 15px; }
+.gold { color: var(--gold); }
+/* DEMO BANNER */
+.demo-banner {
+  position: relative;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 44px 10px 18px;
+  background: linear-gradient(90deg, rgba(212, 180, 131, 0.14), rgba(212, 180, 131, 0.06));
+  border-bottom: 1px solid rgba(212, 180, 131, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-align: center;
+}
+.demo-banner.hidden { display: none; }
+.demo-banner b { color: var(--gold); }
+.demo-banner a.b-demo-link {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 180, 131, 0.4);
+  transition: var(--transition);
+}
+.demo-banner a.b-demo-link:hover { color: var(--gold-soft); border-color: var(--gold); }
+.demo-banner .b-demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 50px;
+  background: rgba(212, 180, 131, 0.16);
+  border: 1px solid rgba(212, 180, 131, 0.4);
+  color: var(--gold);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.demo-banner .b-demo-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); box-shadow: 0 0 8px var(--gold);
+  animation: pulseDot 2.4s ease-in-out infinite;
+}
+.demo-banner .b-demo-close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 180, 131, 0.25);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  transition: var(--transition);
+}
+.demo-banner .b-demo-close:hover { color: var(--gold); border-color: rgba(212, 180, 131, 0.5); }
+
+/* Adjust fixed nav + body offset for banner height */
+body.has-demo-banner { padding-top: 42px; }
+body.has-demo-banner .navbar { top: 42px; }
+
+@media (max-width: 640px) {
+  .demo-banner { font-size: 11.5px; padding: 10px 40px 10px 12px; }
+  body.has-demo-banner { padding-top: 56px; }
+  body.has-demo-banner .navbar { top: 56px; }
+}
+
+/* NAV */
+.navbar {
+  position: fixed; inset: 0 0 auto; z-index: 1000;
+  background: rgba(10, 11, 14, 0.55);
+  backdrop-filter: blur(26px) saturate(180%);
+  -webkit-backdrop-filter: blur(26px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: background .3s, border-color .3s, box-shadow .3s;
+}
+.navbar.scrolled {
+  background: rgba(10, 11, 14, 0.86);
+  border-color: rgba(212, 180, 131, 0.20);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+}
+.nav-inner { height: 78px; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -0.8px; }
+.logo-mark {
+  width: 32px; height: 32px; border-radius: 9px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 18px var(--gold-glow), inset 0 1px 1px rgba(255,255,255,0.5);
+  position: relative;
+}
+.logo-mark::after { content: ""; position: absolute; inset: 7px; border-radius: 4px; background: var(--bg); }
+.logo-mark span { position: relative; z-index: 1; width: 100%; height: 100%; }
+.logo b { color: var(--gold); }
+
+.nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+.nav-links a { color: #B4B0A6; font-size: 13px; transition: color .25s; position: relative; }
+.nav-links a:hover, .nav-links a.active-link { color: var(--text); }
+.nav-links a.active-link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px;
+  height: 2px; border-radius: 2px; background: var(--gold);
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+.nav-cta {
+  padding: 10px 20px; border-radius: 12px;
+  border: 1px solid rgba(212, 180, 131, 0.45);
+  color: var(--gold) !important;
+  background: rgba(212, 180, 131, 0.08);
+  backdrop-filter: blur(12px); transition: var(--transition);
+}
+.nav-cta:hover { background: var(--gold); color: #0A0B0E !important; box-shadow: 0 8px 24px var(--gold-glow); }
+.menu-toggle { display: none; background: transparent; color: var(--text); border: 0; font-size: 24px; }
+
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 13px 22px; border-radius: 12px;
+  font-size: 14px; font-weight: 700; border: 1px solid transparent; transition: var(--transition);
+}
+.btn:hover { transform: translateY(-3px); }
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+  color: #0A0B0E; box-shadow: 0 8px 26px var(--gold-glow);
+}
+.btn-gold:hover { box-shadow: 0 14px 36px rgba(212, 180, 131, 0.45); }
+.btn-ghost {
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.04); color: var(--text); backdrop-filter: blur(14px);
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08); }
+.btn-wa {
+  background: rgba(37, 211, 102, 0.15);
+  border: 1px solid rgba(37, 211, 102, 0.45);
+  color: #4ADE80;
+}
+.btn-wa:hover { background: rgba(37, 211, 102, 0.25); box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25); }
+.btn-sm { padding: 9px 16px; font-size: 12.5px; }
+
+/* GLASS */
+.glass {
+  background: var(--card);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.14), 0 18px 44px rgba(0,0,0,0.38);
+  transition: var(--transition);
+}
+.glass:hover {
+  background: var(--card-hover);
+  border-color: rgba(212, 180, 131, 0.28);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.22), 0 22px 52px rgba(0,0,0,0.45), 0 0 34px var(--gold-glow);
+}
+
+/* HERO — AGENT VOICE */
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 140px 0 90px; position: relative; }
+.hero-glow {
+  position: absolute; width: 640px; height: 640px;
+  background: rgba(212, 180, 131, 0.10);
+  filter: blur(150px); border-radius: 50%; top: 6%; right: -12%; pointer-events: none;
+}
+.hero-content { max-width: 820px; position: relative; z-index: 2; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 8px 16px; border-radius: 50px;
+  border: 1px solid rgba(212, 180, 131, 0.32);
+  background: rgba(212, 180, 131, 0.08);
+  backdrop-filter: blur(14px);
+  color: var(--gold-soft); font-size: 12px; font-weight: 600;
+  margin-bottom: 26px;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.15);
+}
+.badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gold); box-shadow: 0 0 12px var(--gold);
+  animation: pulseDot 2.4s ease-in-out infinite;
+}
+@keyframes pulseDot { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.5; transform:scale(1.2); } }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6.2vw, 72px);
+  line-height: 1.08; letter-spacing: -3px; font-weight: 800; margin-bottom: 22px;
+}
+.hero h1 .accent { color: var(--gold); }
+.hero p.lead { color: var(--muted); font-size: 17px; max-width: 620px; margin-bottom: 34px; }
+.hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 44px; }
+
+.trust-bar {
+  display: flex; flex-wrap: wrap; gap: 24px;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--border);
+  max-width: 700px;
+}
+.trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.trust-item svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.trust-item b { color: var(--text); font-weight: 700; }
+
+/* TOOLS OVERVIEW */
+.modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+.module-card { padding: 26px 22px; cursor: pointer; text-align: left; position: relative; overflow: hidden; }
+.module-card .m-icon {
+  width: 44px; height: 44px; border-radius: 11px;
+  background: rgba(212, 180, 131, 0.10); border: 1px solid rgba(212, 180, 131, 0.25);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 16px; transition: var(--transition);
+}
+.module-card .m-icon svg { width: 21px; height: 21px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.module-card:hover .m-icon { background: rgba(212, 180, 131, 0.2); box-shadow: 0 0 24px var(--gold-glow); }
+.module-card h3 { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.module-card p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+.module-card .m-arrow { position: absolute; top: 22px; right: 20px; font-size: 16px; color: var(--gold); opacity: 0.5; transition: var(--transition); }
+.module-card:hover .m-arrow { opacity: 1; transform: translate(3px, -3px); }
+
+/* WORKSPACE */
+.workspace { margin-top: 36px; }
+.ws-tabs {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px;
+  padding: 6px; background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border); border-radius: 14px; width: fit-content; backdrop-filter: blur(14px);
+}
+.ws-tab {
+  padding: 10px 18px; border-radius: 10px;
+  border: 1px solid transparent; background: transparent;
+  color: var(--muted); font-size: 13px; font-weight: 600;
+  transition: var(--transition); display: inline-flex; align-items: center; gap: 7px;
+}
+.ws-tab svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ws-tab:hover { color: var(--text); }
+.ws-tab.active {
+  background: rgba(212, 180, 131, 0.14); border-color: rgba(212, 180, 131, 0.4);
+  color: var(--gold); box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), 0 0 22px var(--gold-glow);
+}
+.ws-panel { display: none; animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.ws-panel.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.panel-inner { padding: 32px; }
+
+/* SHARED FORM */
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.field label { font-size: 12px; color: var(--muted); font-weight: 600; }
+.field input, .field select, .field textarea {
+  padding: 12px 15px;
+  background: rgba(10, 11, 14, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 11px; color: var(--text); font-size: 13.5px;
+  outline: none; transition: var(--transition); width: 100%;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: rgba(212, 180, 131, 0.5);
+  box-shadow: 0 0 0 3px rgba(212, 180, 131, 0.12);
+}
+.field textarea { resize: vertical; min-height: 90px; font-family: var(--font-body); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* CHIPS */
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.chip {
+  padding: 9px 15px; border-radius: 50px;
+  border: 1px solid var(--border); background: rgba(255,255,255,0.04);
+  color: var(--muted); font-size: 12.5px; font-weight: 600;
+  transition: var(--transition); display: inline-flex; align-items: center; gap: 7px;
+}
+.chip:hover { border-color: rgba(212, 180, 131, 0.45); color: var(--text); }
+.chip.selected {
+  background: rgba(212, 180, 131, 0.16); border-color: var(--gold);
+  color: var(--gold-soft);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 0 16px var(--gold-glow);
+}
+.chip .chip-check { width: 14px; height: 14px; border-radius: 50%; border: 1.4px solid currentColor; display: flex; align-items: center; justify-content: center; opacity: 0.5; }
+.chip.selected .chip-check { opacity: 1; background: var(--gold); border-color: var(--gold); }
+.chip.selected .chip-check::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #0A0B0E; }
+
+/* STEPS */
+.steps-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 26px;
+  padding-bottom: 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap;
+}
+.step-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 50px;
+  font-size: 11.5px; font-weight: 700;
+  border: 1px solid var(--border); color: var(--muted-2);
+  background: rgba(255,255,255,0.02); transition: var(--transition);
+}
+.step-pill.active { border-color: var(--gold); color: var(--gold); background: rgba(212, 180, 131, 0.1); }
+.step-pill.done { border-color: rgba(74, 222, 128, 0.4); color: var(--green); background: rgba(74, 222, 128, 0.08); }
+.step-pill span { width: 16px; height: 16px; border-radius: 50%; background: currentColor; color: #0A0B0E; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; }
+
+.step-panel { display: none; }
+.step-panel.active { display: block; animation: fadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+.step-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+.progress-nudge {
+  margin-top: 16px; padding: 12px 16px;
+  background: rgba(212, 180, 131, 0.06);
+  border: 1px solid rgba(212, 180, 131, 0.2);
+  border-radius: 10px;
+  font-size: 12.5px; color: var(--muted);
+  display: flex; align-items: center; gap: 8px;
+}
+.progress-nudge b { color: var(--gold); }
+.progress-nudge svg { width: 15px; height: 15px; stroke: var(--gold); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+/* MESSAGE PREVIEW */
+.msg-preview {
+  margin-top: 18px; padding: 18px;
+  border-radius: var(--radius-sm);
+  background: rgba(37, 211, 102, 0.05);
+  border: 1px solid rgba(37, 211, 102, 0.2);
+  font-size: 13px; color: #D1D5DB; line-height: 1.6;
+  white-space: pre-wrap; font-family: var(--font-body);
+}
+.msg-preview b { color: var(--green); }
+.msg-preview .mp-label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--green); font-weight: 800; margin-bottom: 10px; }
+
+/* Q&A */
+.qa-layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; }
+.qa-chat {
+  background: rgba(0,0,0,0.22); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 18px; height: 400px;
+  display: flex; flex-direction: column; gap: 12px; overflow-y: auto; scroll-behavior: smooth;
+}
+.qa-msg { max-width: 84%; padding: 11px 15px; border-radius: 14px; font-size: 13px; line-height: 1.55; animation: msgIn 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.qa-msg.user {
+  align-self: flex-end; background: rgba(212, 180, 131, 0.16);
+  border: 1px solid rgba(212, 180, 131, 0.3);
+  border-bottom-right-radius: 4px; color: var(--text);
+}
+.qa-msg.bot {
+  align-self: flex-start; background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 4px; color: var(--text);
+}
+.qa-msg.bot b { color: var(--gold); }
+.qa-msg .qa-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 10px; padding: 8px 14px; border-radius: 10px;
+  background: rgba(37, 211, 102, 0.15);
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  color: #4ADE80; font-size: 12px; font-weight: 700; transition: var(--transition);
+}
+.qa-msg .qa-cta:hover { background: rgba(37, 211, 102, 0.25); }
+
+.qa-quick { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+.qa-chip {
+  padding: 7px 13px; border-radius: 50px;
+  border: 1px solid var(--border); background: rgba(255,255,255,0.04);
+  color: var(--muted); font-size: 11.5px; transition: var(--transition);
+}
+.qa-chip:hover { border-color: rgba(212, 180, 131, 0.5); color: var(--gold); background: rgba(212, 180, 131, 0.1); }
+
+.qa-input-row { display: flex; gap: 8px; margin-top: 12px; }
+.qa-input-row input {
+  flex: 1; padding: 12px 15px; background: rgba(10, 11, 14, 0.6);
+  border: 1px solid var(--border); border-radius: 11px;
+  color: var(--text); outline: none; font-size: 13px; transition: var(--transition);
+}
+.qa-input-row input:focus { border-color: rgba(212, 180, 131, 0.5); box-shadow: 0 0 0 3px rgba(212, 180, 131, 0.12); }
+.qa-send { padding: 12px 18px; border-radius: 11px; background: var(--gold); color: #0A0B0E; border: 0; font-weight: 700; font-size: 13px; transition: var(--transition); }
+.qa-send:hover { background: var(--gold-soft); }
+.qa-info h3 { font-family: var(--font-display); font-size: 19px; margin-bottom: 10px; letter-spacing: -0.4px; }
+.qa-info p { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; }
+.qa-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.qa-features li { display: flex; align-items: flex-start; gap: 11px; font-size: 13px; color: var(--muted); }
+.qa-features li::before {
+  content: "✓"; color: var(--gold); font-weight: 800; font-size: 14px;
+  flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(212, 180, 131, 0.12); border: 1px solid rgba(212, 180, 131, 0.3);
+  display: flex; align-items: center; justify-content: center; line-height: 1; margin-top: 1px;
+}
+
+/* LISTINGS */
+.listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+.listing-card { overflow: hidden; }
+.listing-img {
+  height: 170px;
+  background: linear-gradient(135deg, rgba(212, 180, 131, 0.15), rgba(30, 28, 24, 0.9));
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.listing-img svg { width: 44px; height: 44px; stroke: rgba(212, 180, 131, 0.5); fill: none; stroke-width: 1.4; }
+.listing-img .l-price {
+  position: absolute; bottom: 10px; left: 10px;
+  padding: 6px 12px; border-radius: 8px;
+  background: rgba(10, 11, 14, 0.85); backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 180, 131, 0.3);
+  font-size: 13px; font-weight: 800; color: var(--gold);
+}
+.listing-img .l-badge {
+  position: absolute; top: 10px; right: 10px;
+  padding: 5px 10px; border-radius: 6px;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.3px;
+  background: rgba(74, 222, 128, 0.15); color: var(--green);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+}
+.listing-body { padding: 18px 20px; }
+.listing-body h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.listing-body .l-meta { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+.listing-actions { display: flex; gap: 6px; }
+.listing-actions .btn { flex: 1; padding: 9px 10px; font-size: 11.5px; }
+
+/* VALUATION */
+.valuation-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 26px; align-items: start; }
+
+/* CALLBACK */
+.callback-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 26px; align-items: start; }
+
+/* SAVE SEARCH */
+.save-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 26px; align-items: start; }
+
+/* COMPARISON */
+.compare-layout { display: grid; gap: 18px; }
+.compare-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.compare-toggle {
+  padding: 9px 15px; border-radius: 50px;
+  border: 1px solid var(--border); background: rgba(255,255,255,0.04);
+  color: var(--muted); font-size: 12px; font-weight: 600;
+  transition: var(--transition);
+}
+.compare-toggle.selected {
+  background: rgba(212, 180, 131, 0.16);
+  border-color: var(--gold); color: var(--gold-soft);
+}
+.compare-toggle:disabled { opacity: 0.4; cursor: not-allowed; }
+.compare-table { display: grid; grid-template-columns: 180px repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.compare-cell { background: var(--bg); padding: 14px 16px; font-size: 13px; }
+.compare-cell.c-head { background: rgba(212, 180, 131, 0.06); font-weight: 700; color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.compare-cell.c-row-head { background: rgba(255,255,255,0.02); color: var(--muted); font-weight: 600; font-size: 12px; }
+.compare-cell.c-title { font-weight: 700; color: var(--text); background: rgba(212, 180, 131, 0.06); }
+.compare-cell.c-price { color: var(--gold); font-weight: 800; }
+.compare-actions { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+.compare-actions .ca-info { font-size: 13px; color: var(--muted); }
+.compare-actions .ca-info b { color: var(--gold); }
+
+/* RELOCATION QUIZ */
+.reloc-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 26px; align-items: start; }
+.reloc-progress { height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; margin-top: 22px; overflow: hidden; }
+.reloc-progress-bar { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-soft)); border-radius: 4px; transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 0 12px var(--gold-glow); }
+.reloc-q { font-family: var(--font-display); font-size: 19px; font-weight: 700; margin-bottom: 18px; letter-spacing: -0.4px; }
+.reloc-options { display: flex; flex-direction: column; gap: 9px; }
+.reloc-option {
+  padding: 13px 17px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: rgba(255,255,255,0.03);
+  color: var(--text); text-align: left; font-size: 13.5px; transition: var(--transition);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.reloc-option:hover { border-color: rgba(212, 180, 131, 0.5); background: rgba(212, 180, 131, 0.08); transform: translateX(4px); }
+.reloc-option.selected { border-color: var(--gold); background: rgba(212, 180, 131, 0.15); color: var(--gold-soft); }
+
+/* AGENT TOOLS */
+.agent-tools-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 26px; align-items: start; }
+.tone-row { display: flex; gap: 7px; margin-bottom: 16px; flex-wrap: wrap; }
+.tone-btn {
+  padding: 8px 15px; border-radius: 50px;
+  border: 1px solid var(--border); background: rgba(255,255,255,0.03);
+  color: var(--muted); font-size: 11.5px; font-weight: 600; transition: var(--transition);
+}
+.tone-btn.active { background: rgba(212, 180, 131, 0.14); border-color: rgba(212, 180, 131, 0.45); color: var(--gold); }
+.gen-output {
+  padding: 26px; min-height: 340px; display: flex; flex-direction: column;
+}
+.gen-output-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+}
+.gen-output-header span { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); font-weight: 700; }
+.gen-copy-btn {
+  padding: 6px 13px; border-radius: 8px;
+  border: 1px solid rgba(212, 180, 131, 0.3);
+  background: rgba(212, 180, 131, 0.08); color: var(--gold);
+  font-size: 11px; font-weight: 700; transition: var(--transition);
+}
+.gen-copy-btn:hover { background: rgba(212, 180, 131, 0.18); }
+.gen-copy-btn.copied { background: rgba(74,222,128,0.15); border-color: rgba(74,222,128,0.4); color: var(--green); }
+.gen-text { flex: 1; font-size: 13.5px; line-height: 1.75; color: var(--text); white-space: pre-wrap; }
+.gen-text.empty { color: var(--muted-2); font-size: 13px; }
+
+/* QUICK REPLIES */
+.replies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin-top: 22px; }
+.reply-card { padding: 20px; }
+.reply-card h4 { font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+.reply-card .reply-text { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.reply-copy {
+  padding: 7px 13px; border-radius: 8px;
+  border: 1px solid rgba(212, 180, 131, 0.3);
+  background: rgba(212, 180, 131, 0.08); color: var(--gold);
+  font-size: 11px; font-weight: 700; transition: var(--transition);
+}
+.reply-copy:hover { background: rgba(212, 180, 131, 0.18); }
+.reply-copy.copied { background: rgba(74,222,128,0.15); border-color: rgba(74,222,128,0.4); color: var(--green); }
+
+/* WHY */
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; }
+.why-card { padding: 30px 26px; }
+.why-icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: rgba(212, 180, 131, 0.10); border: 1px solid rgba(212, 180, 131, 0.25);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+}
+.why-icon svg { width: 21px; height: 21px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.why-card h3 { font-family: var(--font-display); font-size: 17px; margin-bottom: 9px; letter-spacing: -0.3px; }
+.why-card p { color: var(--muted); font-size: 13.5px; }
+
+/* CTA */
+.cta-box {
+  margin-top: 20px; padding: 54px; text-align: center;
+  background: radial-gradient(circle at 50% 0%, rgba(212, 180, 131, 0.16), transparent 60%), rgba(255, 255, 255, 0.03);
+}
+.cta-box h2 { font-family: var(--font-display); font-size: clamp(26px, 3.4vw, 38px); font-weight: 800; letter-spacing: -1.2px; margin-bottom: 14px; line-height: 1.2; }
+.cta-box p { color: var(--muted); max-width: 520px; margin: 0 auto 28px; font-size: 15px; }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--border); padding: 34px 0; position: relative; z-index: 2; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.footer-inner p { color: var(--muted-2); font-size: 12px; }
+.footer-links { display: flex; gap: 20px; font-size: 12px; color: var(--muted); }
+.footer-links a:hover { color: var(--gold); }
+
+/* TOASTS */
+#toast-container {
+  position: fixed; bottom: 90px; right: 24px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+}
+.toast {
+  background: rgba(20, 22, 28, 0.92);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 180, 131, 0.35);
+  color: var(--text); padding: 13px 18px; border-radius: 12px;
+  font-size: 13px; display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 24px var(--gold-glow);
+  animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto; max-width: 340px;
+}
+.toast svg { width: 17px; height: 17px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+@keyframes toastIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+.toast.out { animation: toastOut 0.3s ease forwards; }
+@keyframes toastOut { to { opacity: 0; transform: translateX(40px); } }
+
+/* STICKY MOBILE BAR */
+.mobile-bar {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 950;
+  background: rgba(10, 11, 14, 0.92);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border-top: 1px solid rgba(212, 180, 131, 0.2);
+  padding: 10px 14px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  gap: 10px;
+}
+.mobile-bar a {
+  flex: 1; padding: 13px 16px; border-radius: 12px;
+  font-size: 13.5px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: var(--transition);
+}
+.mobile-bar .mb-wa {
+  background: rgba(37, 211, 102, 0.9);
+  color: #0A0B0E;
+}
+.mobile-bar .mb-call {
+  background: rgba(212, 180, 131, 0.15);
+  border: 1px solid rgba(212, 180, 131, 0.4);
+  color: var(--gold);
+}
+.mobile-bar svg { width: 17px; height: 17px; fill: currentColor; }
+.mobile-bar .mb-call svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* FLOATING WHATSAPP (desktop) */
+.wa-float {
+  position: fixed; right: 24px; bottom: 24px; z-index: 900;
+  width: 58px; height: 58px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(37, 211, 102, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3); color: white;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 10px 30px rgba(37,211,102,.4);
+  transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: waIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+}
+@keyframes waIn { from { opacity: 0; transform: scale(0.5) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.wa-float:hover { transform: translateY(-5px) scale(1.08); background: #25D366; box-shadow: inset 0 1px 2px rgba(255,255,255,.6), 0 15px 40px rgba(37,211,102,.5); }
+.wa-float svg { width: 28px; height: 28px; fill: currentColor; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+  .qa-layout, .valuation-layout, .callback-layout, .save-layout, .reloc-layout, .agent-tools-layout { grid-template-columns: 1fr; }
+  .modules-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: 1fr; }
+  .compare-table { grid-template-columns: 130px repeat(3, 1fr); font-size: 12px; }
+}
+@media (max-width: 780px) {
+  .nav-links { gap: 16px; }
+  .field-row { grid-template-columns: 1fr; }
+  .panel-inner { padding: 22px; }
+  .modules-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .mobile-bar { display: flex; }
+  .wa-float { display: none; }
+  body { padding-bottom: 86px; }
+}
+@media (max-width: 640px) {
+  .section { padding: 70px 0; }
+  .container { width: calc(100% - 36px); }
+  .nav-inner { height: 68px; }
+  .menu-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 68px; left: 0; right: 0;
+    background: rgba(10, 11, 14, 0.96);
+    backdrop-filter: blur(26px);
+    border-bottom: 1px solid rgba(212, 180, 131, 0.2);
+    display: none; flex-direction: column; align-items: stretch;
+    padding: 18px; gap: 0;
+  }
+  .nav-links.active { display: flex; }
+  .nav-links a { display: block; padding: 13px; }
+  .nav-cta { text-align: center; margin-top: 8px; }
+  .hero { padding: 120px 0 70px; min-height: auto; }
+  .hero h1 { letter-spacing: -2px; }
+  .cta-box { padding: 36px 22px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .steps-header { gap: 6px; }
+  .step-pill { font-size: 10.5px; padding: 5px 10px; }
+  #toast-container { bottom: 100px; right: 16px; left: 16px; }
+  .compare-table { grid-template-columns: 100px repeat(3, 1fr); font-size: 11px; }
+  .compare-cell { padding: 10px 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<!-- DEMO BANNER (Option A) -->
+<div class="demo-banner" id="demoBanner">
+  <span class="b-demo-badge"><span class="b-demo-dot"></span>Live Demo</span>
+  <span>This is a <b>live demo of the estate agent websites I build</b> — every tool works. Want one like this? <a href="#" class="b-demo-link" id="demoEnquireLink">Get one for your business →</a></span>
+  <button class="b-demo-close" id="demoBannerClose" aria-label="Dismiss demo banner">✕</button>
+</div>
+<!-- ============================================================
+     SWAP THESE THREE CONSTANTS PER CLIENT
+============================================================ -->
+<script>
+  const AGENT_WHATSAPP = "923212181575"; // number, no + or spaces
+  const AGENT_NAME = "Arham";
+  const AGENT_EMAIL = "arhamraza232008@gmail.com";
+  const AGENT_PHONE_DISPLAY = ""; // leave blank — never display raw digits
+</script>
+
+<div class="ambient-blob blob-1"></div>
+<div class="ambient-blob blob-2"></div>
+<div class="ambient-blob blob-3"></div>
+<div id="toast-container"></div>
+
+<!-- NAV -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark"><span></span></span>
+      Estate<b>Flow</b>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" data-nav="home">Home</a></li>
+      <li><a href="#listings" data-nav="listings">Listings</a></li>
+      <li><a href="#tools" data-nav="tools">For Buyers</a></li>
+      <li><a href="#agent-tools" data-nav="agent-tools">For Sellers</a></li>
+      <li><a href="#start" class="nav-cta">Talk to Me ↗</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- HERO — AGENT VOICE -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-content reveal">
+      <span class="hero-badge">
+        <span class="badge-dot"></span>
+        Taking viewings this week
+      </span>
+      <h1>
+        Tell me what you're<br>
+        looking for. <span class="accent">I'll find it.</span>
+      </h1>
+      <p class="lead">
+        I'm a local property agent who listens first and sells second. Whether you're buying your next home, selling the one you're in, or just starting to explore — tell me what matters to you, and I'll do the legwork. Every message comes straight to me on WhatsApp, and I'll get back to you as soon as I can.
+      </p>
+      <div class="hero-buttons">
+        <a href="#pref" class="btn btn-gold" onclick="openWorkspace('pref')">Tell Me What You Want ↗</a>
+        <a href="#listings" class="btn btn-ghost">Browse My Listings</a>
+        <a href="#" class="btn btn-wa" id="heroWaBtn">
+          <svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+          Message Me
+        </a>
+      </div>
+      <div class="trust-bar">
+        <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><b>340+ homes</b> sold locally</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><b>4.9★</b> from past clients</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Replies <b>as soon as I can</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section class="section" id="listings">
+  <div class="container reveal">
+    <span class="section-label">My Current Listings</span>
+    <h2 class="section-title">Homes I'm <span class="gold">currently selling.</span></h2>
+    <p class="section-desc">Every one of these I know personally. Tap "Enquire" on any property to send me a WhatsApp message about it — I'll reply directly.</p>
+    <div class="listing-grid" id="listingGrid"></div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="section" id="tools">
+  <div class="container reveal">
+    <span class="section-label">For Buyers</span>
+    <h2 class="section-title">Tell me what you need. <span class="gold">I'll do the rest.</span></h2>
+    <p class="section-desc">Every tool here sends a real WhatsApp message straight to me — so I know exactly what you're looking for and can help properly.</p>
+
+    <div class="modules-grid" id="toolCards"></div>
+  </div>
+</section>
+
+<!-- WORKSPACE -->
+<section class="section" id="workspace" style="padding-top: 0;">
+  <div class="container reveal">
+    <div class="workspace">
+      <div class="ws-tabs" role="tablist" id="wsTabs"></div>
+
+      <!-- PREFERENCE BUILDER -->
+      <div class="ws-panel active" id="panel-pref">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <div class="steps-header" id="prefSteps">
+            <div class="step-pill active" data-step="0"><span>1</span> Your name</div>
+            <div class="step-pill" data-step="1"><span>2</span> Budget</div>
+            <div class="step-pill" data-step="2"><span>3</span> Area</div>
+            <div class="step-pill" data-step="3"><span>4</span> Beds</div>
+            <div class="step-pill" data-step="4"><span>5</span> Must-haves</div>
+            <div class="step-pill" data-step="5"><span>6</span> Timeline</div>
+            <div class="step-pill" data-step="6"><span>7</span> Preview</div>
+          </div>
+
+          <div class="step-panel active" data-panel="0">
+            <div class="field"><label for="prefName">Your name</label><input type="text" id="prefName" placeholder="e.g. Sarah Mitchell"></div>
+            <div class="field"><label for="prefPhone">Your WhatsApp number (optional)</label><input type="text" id="prefPhone" placeholder="e.g. +44 7700 900123"></div>
+            <p style="color: var(--muted); font-size: 13px;">I'll reply to you on WhatsApp at the number you message me from — adding it here just helps me confirm faster.</p>
+          </div>
+
+          <div class="step-panel" data-panel="1">
+            <label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin-bottom:10px;">What's your budget?</label>
+            <div class="chip-group" data-multi="false" data-key="budget">
+              <button class="chip" data-val="Under £300k">Under £300k</button>
+              <button class="chip" data-val="£300k – £500k">£300k – £500k</button>
+              <button class="chip" data-val="£500k – £750k">£500k – £750k</button>
+              <button class="chip" data-val="£750k+">£750k+</button>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="2">
+            <label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin-bottom:10px;">Preferred area</label>
+            <div class="chip-group" data-multi="false" data-key="area">
+              <button class="chip" data-val="Oakwood">Oakwood</button>
+              <button class="chip" data-val="Northside">Northside</button>
+              <button class="chip" data-val="Riverside">Riverside</button>
+              <button class="chip" data-val="City Centre">City Centre</button>
+              <button class="chip" data-val="Flexible">Flexible</button>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="3">
+            <label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin-bottom:10px;">Bedrooms</label>
+            <div class="chip-group" data-multi="false" data-key="beds">
+              <button class="chip" data-val="1 bed">1 bed</button>
+              <button class="chip" data-val="2 bed">2 bed</button>
+              <button class="chip" data-val="3 bed">3 bed</button>
+              <button class="chip" data-val="4 bed">4 bed</button>
+              <button class="chip" data-val="5+ bed">5+ bed</button>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="4">
+            <label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin-bottom:10px;">Must-haves (select all that apply)</label>
+            <div class="chip-group" data-multi="true" data-key="musthaves">
+              <button class="chip" data-val="Garden">Garden</button>
+              <button class="chip" data-val="Parking">Parking</button>
+              <button class="chip" data-val="Near schools">Near schools</button>
+              <button class="chip" data-val="Pet-friendly">Pet-friendly</button>
+              <button class="chip" data-val="En-suite">En-suite</button>
+              <button class="chip" data-val="Garage">Garage</button>
+              <button class="chip" data-val="Balcony">Balcony</button>
+              <button class="chip" data-val="Smart home">Smart home</button>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="5">
+            <label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin-bottom:10px;">Timeline</label>
+            <div class="chip-group" data-multi="false" data-key="timeline">
+              <button class="chip" data-val="As soon as possible">As soon as possible</button>
+              <button class="chip" data-val="Within 3 months">Within 3 months</button>
+              <button class="chip" data-val="3–6 months">3–6 months</button>
+              <button class="chip" data-val="Just browsing">Just browsing</button>
+            </div>
+            <div class="field" style="margin-top:10px;"><label for="prefNotes">Anything else I should know?</label><textarea id="prefNotes" placeholder="e.g. moving from London for work, need good transport links"></textarea></div>
+          </div>
+
+          <div class="step-panel" data-panel="6">
+            <p style="color: var(--muted); font-size: 13.5px; margin-bottom: 14px;">This is exactly what will be sent to me on WhatsApp:</p>
+            <div class="msg-preview" id="prefPreview"></div>
+            <button class="btn btn-wa" style="width: 100%; margin-top: 16px;" onclick="sendPrefWhatsApp()">
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+              Send to Me on WhatsApp
+            </button>
+            <p style="font-size: 11.5px; color: var(--muted-2); margin-top: 10px;">WhatsApp will open with the message pre-filled. Just press send and I'll be in touch as soon as I can.</p>
+          </div>
+
+          <div class="step-nav">
+            <button class="btn btn-ghost btn-sm" onclick="prefPrev()" id="prefPrevBtn" style="visibility: hidden;">← Back</button>
+            <button class="btn btn-gold btn-sm" onclick="prefNext()" id="prefNextBtn">Next →</button>
+          </div>
+          <div class="progress-nudge" id="prefNudge">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <span id="prefNudgeText">Just <b>6 more questions</b> — then your message goes straight to me.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q&A ASSISTANT -->
+      <div class="ws-panel" id="panel-qa">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <div class="qa-layout">
+            <div>
+              <div class="qa-chat" id="qaChat">
+                <div class="qa-msg bot">Hi! I'm the assistant for <b>12 Oakwood Lane</b>. Ask me anything about the property — price, deposit, bedrooms, schools, parking, or anything else. If I can't help, I'll pass you straight to <b id="qaAgentName">Arham</b> on WhatsApp.</div>
+              </div>
+              <div class="qa-quick">
+                <button class="qa-chip" onclick="qaAsk('How much is the deposit?')">Deposit?</button>
+                <button class="qa-chip" onclick="qaAsk('What is the asking price?')">Price?</button>
+                <button class="qa-chip" onclick="qaAsk('How many bedrooms?')">Bedrooms?</button>
+                <button class="qa-chip" onclick="qaAsk('Is there parking?')">Parking?</button>
+                <button class="qa-chip" onclick="qaAsk('What are the schools like?')">Schools?</button>
+                <button class="qa-chip" onclick="qaAsk('Is it still available?')">Available?</button>
+              </div>
+              <div class="qa-input-row">
+                <input type="text" id="qaInput" placeholder="Ask anything about the property..." onkeydown="if(event.key==='Enter') qaSend()">
+                <button class="qa-send" onclick="qaSend()">Ask</button>
+              </div>
+            </div>
+            <div class="qa-info">
+              <h3>Answered instantly. Escalated when needed.</h3>
+              <p>This assistant answers the most common buyer questions on its own, so you're not waiting for me to reply to something basic. When you need me specifically, one click opens WhatsApp with your question.</p>
+              <ul class="qa-features">
+                <li>Answers price, deposit, fees, bedrooms, parking, schools, availability, EPC, chain, offers</li>
+                <li>Every answer ends with "Ask me directly → WhatsApp"</li>
+                <li>Works after hours, weekends, and holidays</li>
+                <li>You never have to sign up</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEWING SCHEDULER -->
+      <div class="ws-panel" id="panel-sched">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <div class="field-row">
+            <div class="field"><label for="schedName">Your name</label><input type="text" id="schedName" placeholder="e.g. James Carter"></div>
+            <div class="field"><label for="schedPhone">Your WhatsApp number (optional)</label><input type="text" id="schedPhone" placeholder="e.g. +44 7700 900123"></div>
+          </div>
+          <label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin:16px 0 10px;">Pick a viewing time — 12 Oakwood Lane</label>
+          <div class="chip-group" id="slotChips" data-multi="false" data-key="slot">
+            <button class="chip" data-val="Monday 9:00 AM">Mon 9:00 AM</button>
+            <button class="chip" data-val="Monday 11:00 AM">Mon 11:00 AM</button>
+            <button class="chip" data-val="Monday 2:00 PM">Mon 2:00 PM</button>
+            <button class="chip" data-val="Tuesday 9:00 AM">Tue 9:00 AM</button>
+            <button class="chip" data-val="Tuesday 3:00 PM">Tue 3:00 PM</button>
+            <button class="chip" data-val="Wednesday 10:00 AM">Wed 10:00 AM</button>
+            <button class="chip" data-val="Wednesday 5:00 PM">Wed 5:00 PM</button>
+            <button class="chip" data-val="Thursday 12:00 PM">Thu 12:00 PM</button>
+            <button class="chip" data-val="Friday 4:00 PM">Fri 4:00 PM</button>
+            <button class="chip" data-val="Saturday 11:00 AM">Sat 11:00 AM</button>
+          </div>
+          <div class="field" style="margin-top:12px;"><label for="schedNotes">Anything I should know before we meet?</label><textarea id="schedNotes" placeholder="e.g. coming with my partner, need to see the garden"></textarea></div>
+          <div class="msg-preview" id="schedPreview"><span class="mp-label">Message preview</span>Pick a time above and preview will appear here.</div>
+          <button class="btn btn-wa" style="width: 100%; margin-top: 14px;" onclick="sendSchedWhatsApp()">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+            Request Viewing via WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- ASK AGENT -->
+      <div class="ws-panel" id="panel-ask">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <div class="field"><label for="askName">Your name</label><input type="text" id="askName" placeholder="e.g. Priya Patel"></div>
+          <div class="field"><label for="askQuestion">Your question for me</label><textarea id="askQuestion" placeholder="e.g. Is the property chain-free? Would the seller consider an offer near £410k?"></textarea></div>
+          <div class="msg-preview" id="askPreview"><span class="mp-label">Message preview</span>Your question will be sent straight to my WhatsApp.</div>
+          <button class="btn btn-wa" style="width: 100%; margin-top: 14px;" onclick="sendAskWhatsApp()">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+            Send Question to Me
+          </button>
+        </div>
+      </div>
+
+      <!-- SHORTLIST -->
+      <div class="ws-panel" id="panel-shortlist">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <p style="color: var(--muted); font-size: 13.5px; margin-bottom: 18px;">Save properties to your shortlist. When you're ready, send the whole list to me in one WhatsApp message — I'll arrange viewings for the ones you like.</p>
+          <div class="listing-grid" id="shortlistGrid"></div>
+          <div class="compare-actions" style="margin-top: 22px;">
+            <div class="ca-info">You've saved <b id="shortlistCount">0</b> properties.</div>
+            <button class="btn btn-wa" onclick="sendShortlistWhatsApp()">
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+              Send Shortlist to Me
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPARE -->
+      <div class="ws-panel" id="panel-compare">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <p style="color: var(--muted); font-size: 13.5px; margin-bottom: 18px;">Pick up to 3 properties to compare side by side. When you're done, send them to me and I'll tell you which I'd choose and why.</p>
+          <div class="compare-picker" id="comparePicker"></div>
+          <div id="compareTableWrap"></div>
+          <div class="compare-actions" style="margin-top: 18px;">
+            <div class="ca-info">Comparing <b id="compareCount">0</b> of 3 properties.</div>
+            <button class="btn btn-wa" onclick="sendCompareWhatsApp()">
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+              Ask Me About These
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CALLBACK -->
+      <div class="ws-panel" id="panel-callback">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <div class="callback-layout">
+            <div>
+              <div class="field"><label for="cbName">Your name</label><input type="text" id="cbName" placeholder="e.g. Daniel Brooks"></div>
+              <div class="field"><label for="cbPhone">Your number</label><input type="text" id="cbPhone" placeholder="e.g. +44 7700 900123"></div>
+              <label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin:14px 0 10px;">When should I call you?</label>
+              <div class="chip-group" data-multi="false" data-key="cbtime">
+                <button class="chip" data-val="This morning">This morning</button>
+                <button class="chip" data-val="This afternoon">This afternoon</button>
+                <button class="chip" data-val="This evening">This evening</button>
+                <button class="chip" data-val="Tomorrow morning">Tomorrow morning</button>
+                <button class="chip" data-val="Tomorrow afternoon">Tomorrow afternoon</button>
+                <button class="chip" data-val="Anytime — I'm flexible">Anytime — flexible</button>
+              </div>
+              <div class="field" style="margin-top:12px;"><label for="cbAbout">What's it about?</label><textarea id="cbAbout" placeholder="e.g. I'd like to discuss selling my flat on Oakwood Lane"></textarea></div>
+            </div>
+            <div>
+              <div class="msg-preview" id="cbPreview"><span class="mp-label">Message preview</span>Fill in the details and pick a time — your message to me will appear here.</div>
+              <button class="btn btn-wa" style="width: 100%; margin-top: 14px;" onclick="sendCallbackWhatsApp()">
+                <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+                Request a Callback
+              </button>
+              <p style="font-size: 11.5px; color: var(--muted-2); margin-top: 10px;">I'll call you as soon as I can.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAVE SEARCH -->
+      <div class="ws-panel" id="panel-save">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <div class="save-layout">
+            <div>
+              <div class="field"><label for="saveName">Your name</label><input type="text" id="saveName" placeholder="e.g. Sarah Mitchell"></div>
+              <div class="field"><label for="savePhone">Your WhatsApp number</label><input type="text" id="savePhone" placeholder="e.g. +44 7700 900123"></div>
+              <label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin:14px 0 10px;">What should I look out for?</label>
+              <div class="chip-group" data-multi="false" data-key="saveBudget">
+                <button class="chip" data-val="Under £300k">Under £300k</button>
+                <button class="chip" data-val="£300k – £500k">£300k – £500k</button>
+                <button class="chip" data-val="£500k – £750k">£500k – £750k</button>
+                <button class="chip" data-val="£750k+">£750k+</button>
+              </div>
+              <div class="chip-group" data-multi="false" data-key="saveArea">
+                <button class="chip" data-val="Oakwood">Oakwood</button>
+                <button class="chip" data-val="Northside">Northside</button>
+                <button class="chip" data-val="Riverside">Riverside</button>
+                <button class="chip" data-val="City Centre">City Centre</button>
+                <button class="chip" data-val="Any area">Any area</button>
+              </div>
+              <div class="chip-group" data-multi="false" data-key="saveBeds">
+                <button class="chip" data-val="1 bed">1 bed</button>
+                <button class="chip" data-val="2 bed">2 bed</button>
+                <button class="chip" data-val="3 bed">3 bed</button>
+                <button class="chip" data-val="4 bed">4 bed</button>
+                <button class="chip" data-val="5+ bed">5+ bed</button>
+              </div>
+            </div>
+            <div>
+              <div class="msg-preview" id="savePreview"><span class="mp-label">Message preview</span>Fill in your details and preferences — the message I'll receive appears here.</div>
+              <button class="btn btn-wa" style="width: 100%; margin-top: 14px;" onclick="sendSaveWhatsApp()">
+                <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+                Save My Search
+              </button>
+              <p style="font-size: 11.5px; color: var(--muted-2); margin-top: 10px;">I'll message you on WhatsApp when a matching property comes up.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RELOCATION QUIZ -->
+      <div class="ws-panel" id="panel-reloc">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <div class="reloc-layout">
+            <div>
+              <div class="reloc-progress"><div class="reloc-progress-bar" id="relocBar" style="width: 20%;"></div></div>
+              <div style="margin-top:18px;">
+                <div style="font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:8px;" id="relocStep">Question 1 of 5</div>
+                <div class="reloc-q" id="relocQ">Where are you moving from?</div>
+                <div class="reloc-options" id="relocOptions"></div>
+              </div>
+            </div>
+            <div>
+              <div class="msg-preview" id="relocPreview"><span class="mp-label">Your relocation brief</span>Answer the questions on the left and your message to me will build here.</div>
+              <button class="btn btn-wa" style="width: 100%; margin-top: 14px;" onclick="sendRelocWhatsApp()">
+                <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+                Send My Brief
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELLER TOOLS -->
+<section class="section" id="agent-tools">
+  <div class="container reveal">
+    <span class="section-label">For Sellers</span>
+    <h2 class="section-title">Selling? <span class="gold">Let's talk properly.</span></h2>
+    <p class="section-desc">If you're thinking of selling — or just want to know what your home is worth — these are for you.</p>
+
+    <div class="workspace" style="margin-top: 32px;">
+      <div class="ws-tabs" role="tablist" id="sellerTabs">
+        <button class="ws-tab active" data-tab="valu" role="tab" aria-selected="true">Free Valuation</button>
+        <button class="ws-tab" data-tab="replies" role="tab" aria-selected="false">Quick Reply Templates</button>
+      </div>
+
+      <!-- VALUATION -->
+      <div class="ws-panel active" id="panel-valu">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <div class="valuation-layout">
+            <div>
+              <div class="field"><label for="valuName">Your name</label><input type="text" id="valuName" placeholder="e.g. Michael Turner"></div>
+              <div class="field"><label for="valuAddress">Property address</label><input type="text" id="valuAddress" placeholder="e.g. 14 Oakwood Lane, Northside"></div>
+              <div class="field-row">
+                <div class="field"><label for="valuType">Property type</label>
+                  <select id="valuType">
+                    <option>House</option><option>Apartment</option><option>Flat</option><option>Bungalow</option><option>Townhouse</option>
+                  </select>
+                </div>
+                <div class="field"><label for="valuBeds">Bedrooms</label>
+                  <select id="valuBeds"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+                </div>
+              </div>
+              <div class="field"><label for="valuCondition">Condition</label>
+                <select id="valuCondition">
+                  <option>Excellent — recently updated</option>
+                  <option>Good — well maintained</option>
+                  <option>Fair — could use some work</option>
+                  <option>Needs renovation</option>
+                </select>
+              </div>
+              <div class="field"><label for="valuNotes">Anything else?</label><textarea id="valuNotes" placeholder="e.g. large garden, off-street parking, sold similar properties nearby"></textarea></div>
+            </div>
+            <div>
+              <div class="msg-preview" id="valuPreview"><span class="mp-label">Message preview</span>Fill in your property details and the message I'll receive appears here.</div>
+              <button class="btn btn-wa" style="width: 100%; margin-top: 14px;" onclick="sendValuationWhatsApp()">
+                <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+                Request Free Valuation
+              </button>
+              <p style="font-size: 11.5px; color: var(--muted-2); margin-top: 10px;">I'll get back to you as soon as I can with an honest valuation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK REPLIES -->
+      <div class="ws-panel" id="panel-replies">
+        <div class="panel-inner glass" style="border-radius: var(--radius);">
+          <p style="color: var(--muted); font-size: 13.5px; margin-bottom: 6px;">Pre-written replies you can copy and paste into WhatsApp in one tap — no retyping the same thing 20 times a day.</p>
+          <div class="replies-grid" id="repliesGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section" id="why">
+  <div class="container reveal">
+    <span class="section-label">Why Work With Me</span>
+    <h2 class="section-title">Real service. <span class="gold"></span></h2>
+    <p class="section-desc">I'm one person who knows this area. Every message comes straight to me — no teams, no middlemen, no scripts.</p>
+    <div class="why-grid">
+      <article class="why-card glass">
+        <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>One agent, start to finish</h3>
+        <p>You deal with me directly — for the viewing, the offer, the paperwork, and the keys. No handoffs, no "let me check with my colleague."</p>
+      </article>
+      <article class="why-card glass">
+        <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Local, not national</h3>
+        <p>I know every street, school, and quiet corner. I can tell you what a property is really worth, not just what the portal says.</p>
+      </article>
+      <article class="why-card glass">
+        <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+        <h3>Straight to my WhatsApp</h3>
+        <p>Every tool here sends a real WhatsApp message to me — not a form that disappears. You get a reply, and I get a real conversation.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="start">
+  <div class="container reveal">
+    <div class="cta-box glass">
+      <h2>Tell me what you're looking for.</h2>
+      <p>Whether you're buying, selling, or just exploring — message me directly. I'll get back to you as soon as I can.</p>
+      <a href="#pref" class="btn btn-gold" onclick="openWorkspace('pref')" style="margin-top: 6px;">Start the Conversation ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+ <!-- BUILT BY ARHAM — PITCH SECTION -->
+<section class="section" id="built-by" style="padding: 60px 0;">
+  <div class="container reveal">
+    <div class="cta-box glass" style="padding: 44px 40px;">
+      <span class="section-label" style="margin-bottom: 14px;">Built by Arham Raza</span>
+      <h2 style="font-size: clamp(24px, 3vw, 34px);">Like what you see?</h2>
+      <p style="margin-bottom: 24px;">
+        This entire site — every tool, every WhatsApp flow, every animation — was built by me, Arham Raza, a web developer who builds high-converting real estate websites. If you're an agent and want a site like this one, get in touch.
+      </p>
+      <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <a href="#" class="btn btn-gold" id="builtByWaBtn">
+          <svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:currentColor;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+          Message me on WhatsApp
+        </a>
+        <a href="https://codifydev.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          See more of my work ↗
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container footer-inner">
+    <a href="#home" class="logo" style="font-size:19px;">
+      <span class="logo-mark"><span></span></span>
+      Estate<b>Flow</b>
+    </a>
+    <p>© <span id="year"></span> EstateFlow · Arham Raza · Local Property Agent · Built with intention.</p>
+    <div class="footer-links">
+      <a href="#home">Back to top ↑</a>
+      <a href="#listings">Listings</a>
+      <a href="#tools">For Buyers</a>
+      <a href="#agent-tools">For Sellers</a>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE STICKY BAR -->
+<div class="mobile-bar">
+  <a href="#" class="mb-wa" id="mobileWaBtn">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.94 1.35-.5.04-1.12.26-3.68-.79-3.06-1.26-5.01-4.42-5.16-4.63-.15-.21-1.24-1.65-1.24-3.15 0-1.5.79-2.24 1.07-2.55.28-.31.61-.39.82-.39.2 0 .41.01.59.02.19.01.44-.07.69.53.24.6.82 2.07.89 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.18-.32.4-.46.54-.15.15-.3.31-.13.61.17.3.77 1.28 1.65 2.07 1.13 1.01 2.08 1.32 2.38 1.47.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg>
+    Message Me
+  </a>
+  <a href="tel:+" class="mb-call" id="mobileCallBtn">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Call Me
+  </a>
+</div>
+
+<!-- FLOATING WHATSAPP (desktop) -->
+<a href="#" id="waFloat" class="wa-float" aria-label="Message me on WhatsApp" target="_blank" rel="noopener noreferrer">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.82.75 5.57 2.18 7.99L.5 31.5l7.7-2.02A15.43 15.43 0 0 0 16 31.5c8.56 0 15.5-6.94 15.5-15.5S24.56.5 16 .5zm0 28.2c-2.35 0-4.66-.63-6.67-1.83l-.48-.28-4.57 1.2 1.22-4.45-.31-.5A12.63 12.63 0 0 1 3.2 16C3.2 8.93 8.93 3.2 16 3.2S28.8 8.93 28.8 16 23.07 28.7 16 28.7zm6.94-9.47c-.38-.19-2.23-1.1-2.58-1.22-.35-.13-.6-.19-.85.19-.38.56-1.45.98-1.77 1.06-.3.08-.65.04-1.03-.15-.38-.19-1.6-.59-3.05-1.88-1.13-1-1.9-2.24-2.12-2.62-.22-.38-.02-.58.17-.77.17-.17.38-.44.56-.66.19-.22.25-.38.38-.63.13-.25.06-.47-.03-.66-.09-.19-.85-2.04-1.16-2.8-.3-.74-.62-.64-.85-.65h-.72c-.25 0-.66.09-1 .47-.34.38-1.3 1.27-1.3 3.1 0 1.83 1.33 3.6 1.52 3.85.19.25 2.62 4 6.35 5.6.89.38 1.59.61 2.13.78.9.29 1.72.25 2.37.15.72-.11 2.23-.91 2.55-1.79.31-.88.31-1.63.22-1.79-.1-.16-.35-.25-.73-.44z"/></svg>
+</a>
+
+<script>
+/* =========================================
+   ESTATEFLOW — JS
+========================================= */
+
+/* --- WHATSAPP HELPERS --- */
+function waLink(msg) { return "https://wa.me/" + AGENT_WHATSAPP + "?text=" + encodeURIComponent(msg); }
+function openWhatsApp(msg) { window.open(waLink(msg), "_blank"); }
+function showToast(msg) {
+  const c = document.getElementById("toast-container");
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(() => { t.classList.add("out"); setTimeout(() => t.remove(), 320); }, 3200);
+}
+
+/* --- NAV --- */
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+menuToggle.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("active");
+  menuToggle.setAttribute("aria-expanded", open);
+  menuToggle.textContent = open ? "✕" : "☰";
+});
+document.querySelectorAll(".nav-links a").forEach(l => l.addEventListener("click", () => {
+  navLinks.classList.remove("active");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.textContent = "☰";
+}));
+const navbar = document.getElementById("navbar");
+window.addEventListener("scroll", () => navbar.classList.toggle("scrolled", window.scrollY > 24));
+
+const revealElements = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window) {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
+  }, { threshold: 0.10 });
+  revealElements.forEach(el => obs.observe(el));
+} else revealElements.forEach(el => el.classList.add("visible"));
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const sections = document.querySelectorAll("section[id]");
+const navAnchors = document.querySelectorAll('.nav-links a[data-nav]');
+window.addEventListener("scroll", () => {
+  let current = "";
+  const pos = window.scrollY + 130;
+  sections.forEach(s => { if (pos >= s.offsetTop) current = s.id; });
+  navAnchors.forEach(a => a.classList.toggle("active-link", a.dataset.nav === current));
+});
+
+/* --- AGENT NAME INJECTION --- */
+document.querySelectorAll("[id='qaAgentName']").forEach(el => el.textContent = AGENT_NAME);
+const heroWa = document.getElementById("heroWaBtn");
+if (heroWa) heroWa.href = waLink("Hi " + AGENT_NAME + ", I'd like to talk about a property.");
+const waFloat = document.getElementById("waFloat");
+if (waFloat) waFloat.href = waLink("Hi " + AGENT_NAME + ", I'd like to chat about a property.");
+const mobileWa = document.getElementById("mobileWaBtn");
+if (mobileWa) mobileWa.href = waLink("Hi " + AGENT_NAME + ", I'd like to chat about a property.");
+const mobileCall = document.getElementById("mobileCallBtn");
+if (mobileCall) mobileCall.href = "tel:+" + AGENT_WHATSAPP;
+
+/* =========================================
+   CHIP SYSTEM
+========================================= */
+function bindChips(scope) {
+  (scope || document).querySelectorAll(".chip-group").forEach(group => {
+    const multi = group.dataset.multi === "true";
+    group.querySelectorAll(".chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        if (multi) chip.classList.toggle("selected");
+        else { group.querySelectorAll(".chip").forEach(c => c.classList.remove("selected")); chip.classList.add("selected"); }
+        group.dispatchEvent(new CustomEvent("chipchange", { bubbles: true }));
+      });
+    });
+  });
+}
+bindChips();
+function getChipValues(group) { return Array.from(group.querySelectorAll(".chip.selected")).map(c => c.dataset.val); }
+
+/* =========================================
+   TOOL CARDS (dynamic)
+========================================= */
+const TOOLS = [
+  { id: "pref", title: "Tell Me What You Want", desc: "Answer 6 quick questions → I receive a structured WhatsApp message with your requirements.", icon: "M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" },
+  { id: "qa", title: "Ask the Assistant", desc: "Answers common property questions instantly — and escalates to me on WhatsApp.", icon: "M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" },
+  { id: "sched", title: "Book a Viewing", desc: "Pick a slot, send me the request on WhatsApp, I'll confirm.", icon: "M3 4h18v18H3z M16 2v4 M8 2v4 M3 10h18" },
+  { id: "ask", title: "Ask Me Directly", desc: "Type any question — it comes straight to my WhatsApp.", icon: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3 M12 17h.01" },
+  { id: "shortlist", title: "Send My Shortlist", desc: "Save properties → send the whole list to me in one message.", icon: "M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" },
+  { id: "compare", title: "Compare Properties", desc: "Compare up to 3 side by side, then ask me which I'd pick.", icon: "M3 6h18 M3 12h18 M3 18h18" },
+  { id: "callback", title: "Book a Callback", desc: "Pick a time that works for you — I'll call you then.", icon: "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" },
+  { id: "save", title: "Save My Search", desc: "Tell me your criteria — I'll alert you when a match comes up.", icon: "M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7 M16 5l5 5-7 7H9v-5z" },
+  { id: "reloc", title: "New to the Area?", desc: "A short quiz so I can help you relocate properly.", icon: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z M12 10h.01" },
+];
+
+function renderToolCards() {
+  const grid = document.getElementById("toolCards");
+  grid.innerHTML = TOOLS.map(t => `
+    <button class="module-card glass" onclick="openWorkspace('${t.id}')">
+      <span class="m-arrow">↗</span>
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="${t.icon}" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>${t.title}</h3>
+      <p>${t.desc}</p>
+    </button>
+  `).join("");
+}
+
+function renderWsTabs() {
+  const tabs = document.getElementById("wsTabs");
+  tabs.innerHTML = TOOLS.map((t, i) => `
+    <button class="ws-tab ${i === 0 ? "active" : ""}" data-tab="${t.id}" role="tab" aria-selected="${i === 0}">${t.title}</button>
+  `).join("");
+}
+
+function openWorkspace(tabId) {
+  document.querySelectorAll("#wsTabs .ws-tab").forEach(t => {
+    const m = t.dataset.tab === tabId;
+    t.classList.toggle("active", m);
+    t.setAttribute("aria-selected", m);
+  });
+  document.querySelectorAll("#workspace .ws-panel").forEach(p => p.classList.toggle("active", p.id === "panel-" + tabId));
+  document.getElementById("workspace").scrollIntoView({ behavior: "smooth", block: "start" });
+  updateUrlState({ tab: tabId });
+}
+
+/* =========================================
+   URL STATE (shareable)
+========================================= */
+function updateUrlState(obj) {
+  const url = new URL(window.location);
+  Object.keys(obj).forEach(k => {
+    if (obj[k]) url.searchParams.set(k, obj[k]);
+    else url.searchParams.delete(k);
+  });
+  window.history.replaceState({}, "", url);
+}
+function readUrlState() {
+  const p = new URL(window.location).searchParams;
+  if (p.get("tab")) openWorkspace(p.get("tab"));
+}
+readUrlState();
+
+/* =========================================
+   LISTINGS
+========================================= */
+const PROPERTIES = [
+  { id: 1, title: "12 Oakwood Lane", price: "£425,000", meta: "3 bed · 2 bath · Garden · Parking", tag: "New listing" },
+  { id: 2, title: "8 Riverside Walk", price: "£385,000", meta: "2 bed · 1 bath · Balcony · River view", tag: "" },
+  { id: 3, title: "24 Northside Avenue", price: "£510,000", meta: "4 bed · 2 bath · Garage · Near schools", tag: "Family home" },
+  { id: 4, title: "5 City Centre Loft", price: "£295,000", meta: "1 bed · 1 bath · Smart home · Central", tag: "" },
+  { id: 5, title: "17 Oakwood Gardens", price: "£460,000", meta: "3 bed · 2 bath · En-suite · Garden", tag: "" },
+  { id: 6, title: "3 Riverside Court", price: "£340,000", meta: "2 bed · 1 bath · Parking · Pet-friendly", tag: "" },
+];
+
+function renderListings() {
+  const grid = document.getElementById("listingGrid");
+  grid.innerHTML = PROPERTIES.map(p => `
+    <div class="listing-card glass">
+      <div class="listing-img">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="l-price">${p.price}</span>
+        ${p.tag ? `<span class="l-badge">${p.tag}</span>` : ""}
+      </div>
+      <div class="listing-body">
+        <h4>${p.title}</h4>
+        <p class="l-meta">${p.meta}</p>
+        <div class="listing-actions">
+          <a class="btn btn-wa" href="${waLink(`Hi ${AGENT_NAME}, I'd like to enquire about ${p.title} (${p.price}). Could you tell me more?`)}" target="_blank" rel="noopener">Enquire</a>
+          <a class="btn btn-ghost" href="${waLink(`Hi ${AGENT_NAME}, I'd like to book a viewing for ${p.title}.`)}" target="_blank" rel="noopener">Viewing</a>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* =========================================
+   PREFERENCE BUILDER (multi-step + nudges + url state)
+========================================= */
+let prefStep = 0;
+const PREF_TOTAL = 7;
+const PREF_NAMES = ["Your name", "Budget", "Area", "Beds", "Must-haves", "Timeline", "Preview"];
+let prefDataSnapshot = {};
+
+function prefShowStep(n) {
+  prefStep = n;
+  document.querySelectorAll("#panel-pref .step-panel").forEach(p => p.classList.toggle("active", parseInt(p.dataset.panel) === n));
+  document.querySelectorAll("#prefSteps .step-pill").forEach(p => {
+    const s = parseInt(p.dataset.step);
+    p.classList.toggle("active", s === n);
+    p.classList.toggle("done", s < n);
+  });
+  document.getElementById("prefPrevBtn").style.visibility = n === 0 ? "hidden" : "visible";
+  document.getElementById("prefNextBtn").style.visibility = n === PREF_TOTAL - 1 ? "hidden" : "visible";
+  const remaining = PREF_TOTAL - 1 - n;
+  const nudge = document.getElementById("prefNudgeText");
+  if (n === 0) nudge.innerHTML = `Just <b>${remaining} more questions</b> — then your message goes straight to me.`;
+  else if (remaining > 0) nudge.innerHTML = `<b>${remaining} more question${remaining === 1 ? "" : "s"}</b> — nearly there, and your message goes straight to me.`;
+  else nudge.innerHTML = `All done. Review your message on the right and send it to me when ready.`;
+  if (n === PREF_TOTAL - 1) buildPrefPreview();
+  updateUrlState({ prefstep: n > 0 ? n : "" });
+}
+function prefNext() {
+  if (prefStep === 0) {
+    const name = document.getElementById("prefName").value.trim();
+    if (!name) { showToast("Please enter your name first"); return; }
+  }
+  if (prefStep < PREF_TOTAL - 1) prefShowStep(prefStep + 1);
+}
+function prefPrev() { if (prefStep > 0) prefShowStep(prefStep - 1); }
+
+document.querySelectorAll("#panel-pref .chip-group, #panel-pref .field input, #panel-pref .field textarea").forEach(el => {
+  el.addEventListener("input", () => { if (prefStep === PREF_TOTAL - 1) buildPrefPreview(); });
+  el.addEventListener("chipchange", () => { if (prefStep === PREF_TOTAL - 1) buildPrefPreview(); });
+});
+
+function prefData() {
+  return {
+    name: document.getElementById("prefName").value.trim() || "A buyer",
+    phone: document.getElementById("prefPhone").value.trim(),
+    budget: getChipValues(document.querySelector('[data-key="budget"]'))[0] || "—",
+    area: getChipValues(document.querySelector('[data-key="area"]'))[0] || "—",
+    beds: getChipValues(document.querySelector('[data-key="beds"]'))[0] || "—",
+    musthaves: getChipValues(document.querySelector('[data-key="musthaves"]')),
+    timeline: getChipValues(document.querySelector('[data-key="timeline"]'))[0] || "—",
+    notes: document.getElementById("prefNotes").value.trim()
+  };
+}
+function buildPrefPreview() {
+  const d = prefData();
+  let msg = `Hi ${AGENT_NAME}, I'm ${d.name}.\n\nI'm looking for a property:\n`;
+  msg += `• Budget: ${d.budget}\n• Area: ${d.area}\n• Bedrooms: ${d.beds}\n`;
+  if (d.musthaves.length) msg += `• Must-haves: ${d.musthaves.join(", ")}\n`;
+  msg += `• Timeline: ${d.timeline}\n`;
+  if (d.notes) msg += `\nNotes: ${d.notes}\n`;
+  if (d.phone) msg += `\nMy WhatsApp: ${d.phone}\n`;
+  msg += `\nCould you send me some matching properties?\nThanks!`;
+  document.getElementById("prefPreview").innerHTML = `<span class="mp-label">Message preview</span>` + msg.replace(/</g, "&lt;");
+}
+function sendPrefWhatsApp() {
+  const d = prefData();
+  if (!d.name || d.name === "A buyer") { showToast("Please enter your name"); return; }
+  buildPrefPreview();
+  const msg = document.getElementById("prefPreview").textContent.replace("Message preview", "").trim();
+  openWhatsApp(msg);
+  showToast("WhatsApp opened — just press send");
+}
+
+/* =========================================
+   Q&A
+========================================= */
+const qaChat = document.getElementById("qaChat");
+const qaInput = document.getElementById("qaInput");
+const QA_ANSWERS = [
+  { keys: ["deposit"], text: `The deposit is <b>£42,500</b> — 10% of the £425,000 asking price. A £500 holding deposit secures it.` },
+  { keys: ["price", "cost", "asking"], text: `The asking price is <b>£425,000</b>. Offers are being considered.` },
+  { keys: ["bedroom", "bed"], text: `It's a <b>3-bedroom house</b> with a master en-suite, family bathroom, and open-plan living area.` },
+  { keys: ["bathroom"], text: `There are <b>2 bathrooms</b>: a master en-suite and a family bathroom.` },
+  { keys: ["parking", "garage", "car"], text: `Yes — there's <b>off-street parking for two cars</b> plus a single garage.` },
+  { keys: ["garden", "outdoor"], text: `Yes — a <b>private south-facing garden</b> with a patio, roughly 40 sqm.` },
+  { keys: ["school", "education"], text: `The property is in the catchment for <b>two Ofsted 'Outstanding'</b> primary schools, both under a 10-minute walk.` },
+  { keys: ["available", "still"], text: `Yes — <b>12 Oakwood Lane is still available</b>. Two other buyers are viewing this week.` },
+  { keys: ["yield", "rental", "invest"], text: `The estimated rental yield is <b>4.8%</b> — around £1,700/month against the £425,000 asking price.` },
+  { keys: ["fee", "monthly"], text: `Monthly fees are <b>£145</b>, covering building maintenance, insurance, and communal upkeep.` },
+  { keys: ["epc", "energy"], text: `The Energy Performance Certificate rating is <b>B (84)</b> — very efficient for its size.` },
+  { keys: ["chain"], text: `There is <b>no onward chain</b> — the seller is relocating and ready to move quickly.` },
+  { keys: ["offer"], text: `The seller is open to offers. I can pass yours directly to me on WhatsApp.` },
+  { keys: ["viewing", "view", "visit"], text: `Absolutely — tap the button below and I'll arrange a viewing for you on WhatsApp.` },
+  { keys: ["hello", "hi", "hey"], text: `Hi! I'm here to help with anything about <b>12 Oakwood Lane</b>. Ask about price, deposit, bedrooms, schools, parking — or anything else.` },
+  { keys: ["thank", "thanks"], text: `You're welcome! If you'd like to speak with ${AGENT_NAME} directly, tap the WhatsApp button below.` },
+];
+function qaAsk(text) {
+  addQA("user", text);
+  qaInput.value = "";
+  setTimeout(() => {
+    const lower = text.toLowerCase();
+    let answer = null;
+    for (const item of QA_ANSWERS) { if (item.keys.some(k => lower.includes(k))) { answer = item.text; break; } }
+    if (!answer) answer = `I don't have that answer in my notes, but ${AGENT_NAME} will. Tap the WhatsApp button below and your question goes straight to me.`;
+    addQA("bot", answer + `<br><a class="qa-cta" href="${waLink('Hi ' + AGENT_NAME + ', I have a question about 12 Oakwood Lane: ' + text)}" target="_blank" rel="noopener">Ask me directly → WhatsApp</a>`);
+  }, 420);
+}
+function addQA(role, html) {
+  const m = document.createElement("div");
+  m.className = "qa-msg " + role;
+  m.innerHTML = html;
+  qaChat.appendChild(m);
+  qaChat.scrollTop = qaChat.scrollHeight;
+}
+function qaSend() { const t = qaInput.value.trim(); if (t) qaAsk(t); }
+
+/* =========================================
+   VIEWING SCHEDULER
+========================================= */
+function buildSchedPreview() {
+  const name = document.getElementById("schedName").value.trim() || "A buyer";
+  const phone = document.getElementById("schedPhone").value.trim();
+  const slot = getChipValues(document.querySelector('#slotChips'))[0];
+  const notes = document.getElementById("schedNotes").value.trim();
+  const prev = document.getElementById("schedPreview");
+  if (!slot) { prev.innerHTML = `<span class="mp-label">Message preview</span>Pick a time above and preview will appear here.`; return; }
+  let msg = `Hi ${AGENT_NAME}, I'm ${name}.\n\nI'd like to request a viewing of 12 Oakwood Lane on ${slot}.\n`;
+  if (notes) msg += `\nNotes: ${notes}\n`;
+  if (phone) msg += `\nMy WhatsApp: ${phone}\n`;
+  msg += `\nDoes that time work for you?\nThanks!`;
+  prev.innerHTML = `<span class="mp-label">Message preview</span>` + msg.replace(/</g, "&lt;");
+}
+["schedName", "schedPhone", "schedNotes"].forEach(id => document.getElementById(id).addEventListener("input", buildSchedPreview));
+document.querySelector("#slotChips").addEventListener("chipchange", buildSchedPreview);
+function sendSchedWhatsApp() {
+  const name = document.getElementById("schedName").value.trim();
+  const slot = getChipValues(document.querySelector('#slotChips'))[0];
+  if (!name) { showToast("Please enter your name"); return; }
+  if (!slot) { showToast("Please pick a viewing time"); return; }
+  buildSchedPreview();
+  const msg = document.getElementById("schedPreview").textContent.replace("Message preview", "").trim();
+  openWhatsApp(msg);
+  showToast("WhatsApp opened — request your viewing");
+}
+
+/* =========================================
+   ASK AGENT
+========================================= */
+function buildAskPreview() {
+  const name = document.getElementById("askName").value.trim() || "A buyer";
+  const q = document.getElementById("askQuestion").value.trim();
+  const prev = document.getElementById("askPreview");
+  if (!q) { prev.innerHTML = `<span class="mp-label">Message preview</span>Your question will be sent straight to my WhatsApp.`; return; }
+  const msg = `Hi ${AGENT_NAME}, I'm ${name}.\n\nMy question about 12 Oakwood Lane:\n"${q}"\n\nThanks!`;
+  prev.innerHTML = `<span class="mp-label">Message preview</span>` + msg.replace(/</g, "&lt;");
+}
+document.getElementById("askName").addEventListener("input", buildAskPreview);
+document.getElementById("askQuestion").addEventListener("input", buildAskPreview);
+function sendAskWhatsApp() {
+  const name = document.getElementById("askName").value.trim();
+  const q = document.getElementById("askQuestion").value.trim();
+  if (!name) { showToast("Please enter your name"); return; }
+  if (!q) { showToast("Please type your question"); return; }
+  openWhatsApp(`Hi ${AGENT_NAME}, I'm ${name}.\n\nMy question about 12 Oakwood Lane:\n"${q}"\n\nThanks!`);
+  showToast("WhatsApp opened — send your question");
+}
+
+/* =========================================
+   SHORTLIST
+========================================= */
+const savedProps = new Set();
+function renderShortlist() {
+  const grid = document.getElementById("shortlistGrid");
+  grid.innerHTML = PROPERTIES.map(p => {
+    const saved = savedProps.has(p.id);
+    return `
+      <div class="listing-card glass">
+        <div class="listing-img">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="l-price">${p.price}</span>
+        </div>
+        <div class="listing-body">
+          <h4>${p.title}</h4>
+          <p class="l-meta">${p.meta}</p>
+          <div class="listing-actions">
+            <button class="btn btn-ghost" onclick="toggleSave(${p.id})">${saved ? "✓ Saved" : "Save"}</button>
+            <a class="btn btn-wa" href="${waLink(`Hi ${AGENT_NAME}, I'm interested in ${p.title} (${p.price}). Could you tell me more?`)}" target="_blank" rel="noopener">Ask</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  document.getElementById("shortlistCount").textContent = savedProps.size;
+}
+function toggleSave(id) { savedProps.has(id) ? savedProps.delete(id) : savedProps.add(id); renderShortlist(); }
+function sendShortlistWhatsApp() {
+  if (savedProps.size === 0) { showToast("Save at least one property first"); return; }
+  const items = PROPERTIES.filter(p => savedProps.has(p.id));
+  let msg = `Hi ${AGENT_NAME}, here's my shortlist:\n\n`;
+  items.forEach((p, i) => msg += `${i + 1}. ${p.title} — ${p.price}\n   ${p.meta}\n`);
+  msg += `\nCould you arrange viewings for these?\nThanks!`;
+  openWhatsApp(msg);
+  showToast("WhatsApp opened — send your shortlist");
+}
+
+/* =========================================
+   COMPARE
+========================================= */
+const compareSet = new Set();
+function renderCompare() {
+  const picker = document.getElementById("comparePicker");
+  picker.innerHTML = PROPERTIES.map(p => `
+    <button class="compare-toggle ${compareSet.has(p.id) ? "selected" : ""}" onclick="toggleCompare(${p.id})" ${!compareSet.has(p.id) && compareSet.size >= 3 ? "disabled" : ""}>${p.title}</button>
+  `).join("");
+
+  const wrap = document.getElementById("compareTableWrap");
+  const selected = PROPERTIES.filter(p => compareSet.has(p.id));
+  document.getElementById("compareCount").textContent = selected.length;
+
+  if (selected.length === 0) {
+    wrap.innerHTML = `<div class="msg-preview"><span class="mp-label">Comparison</span>Select properties above to see them side by side.</div>`;
+    return;
+  }
+  const rows = [
+    ["Property", ...selected.map(p => `<span class="c-title">${p.title}</span>`)],
+    ["Price", ...selected.map(p => `<span class="c-price">${p.price}</span>`)],
+    ["Details", ...selected.map(p => p.meta)],
+    ["Status", ...selected.map(() => "Available")],
+  ];
+  wrap.innerHTML = `
+    <div class="compare-table">
+      ${rows.map((row, ri) => row.map((cell, ci) => `<div class="compare-cell ${ri === 0 ? "c-head" : (ci === 0 ? "c-row-head" : "")} ${ri === 1 && ci > 0 ? "c-price" : ""}">${cell}</div>`).join("")).join("")}
+    </div>
+  `;
+}
+function toggleCompare(id) {
+  if (compareSet.has(id)) compareSet.delete(id);
+  else if (compareSet.size < 3) compareSet.add(id);
+  renderCompare();
+  updateUrlState({ compare: Array.from(compareSet).join(",") });
+}
+function sendCompareWhatsApp() {
+  if (compareSet.size === 0) { showToast("Select at least one property"); return; }
+  const selected = PROPERTIES.filter(p => compareSet.has(p.id));
+  let msg = `Hi ${AGENT_NAME}, I'm comparing these properties:\n\n`;
+  selected.forEach((p, i) => msg += `${i + 1}. ${p.title} — ${p.price}\n   ${p.meta}\n`);
+  msg += `\nWhich would you recommend and why?\nThanks!`;
+  openWhatsApp(msg);
+  showToast("WhatsApp opened — ask me about these");
+}
+
+/* =========================================
+   CALLBACK
+========================================= */
+function buildCbPreview() {
+  const name = document.getElementById("cbName").value.trim() || "A buyer";
+  const phone = document.getElementById("cbPhone").value.trim();
+  const time = getChipValues(document.querySelector('[data-key="cbtime"]'))[0];
+  const about = document.getElementById("cbAbout").value.trim();
+  const prev = document.getElementById("cbPreview");
+  if (!time) { prev.innerHTML = `<span class="mp-label">Message preview</span>Fill in the details and pick a time — your message to me will appear here.`; return; }
+  let msg = `Hi ${AGENT_NAME}, I'm ${name}.\n\nI'd like a callback: ${time}.\n`;
+  if (about) msg += `\nAbout: ${about}\n`;
+  if (phone) msg += `\nMy number: ${phone}\n`;
+  msg += `\nThanks!`;
+  prev.innerHTML = `<span class="mp-label">Message preview</span>` + msg.replace(/</g, "&lt;");
+}
+["cbName", "cbPhone", "cbAbout"].forEach(id => document.getElementById(id).addEventListener("input", buildCbPreview));
+document.querySelector('[data-key="cbtime"]').addEventListener("chipchange", buildCbPreview);
+function sendCallbackWhatsApp() {
+  const name = document.getElementById("cbName").value.trim();
+  const time = getChipValues(document.querySelector('[data-key="cbtime"]'))[0];
+  if (!name) { showToast("Please enter your name"); return; }
+  if (!time) { showToast("Please pick a time"); return; }
+  buildCbPreview();
+  const msg = document.getElementById("cbPreview").textContent.replace("Message preview", "").trim();
+  openWhatsApp(msg);
+  showToast("WhatsApp opened — request your callback");
+}
+
+/* =========================================
+   SAVE SEARCH
+========================================= */
+function buildSavePreview() {
+  const name = document.getElementById("saveName").value.trim() || "A buyer";
+  const phone = document.getElementById("savePhone").value.trim();
+  const budget = getChipValues(document.querySelector('[data-key="saveBudget"]'))[0];
+  const area = getChipValues(document.querySelector('[data-key="saveArea"]'))[0];
+  const beds = getChipValues(document.querySelector('[data-key="saveBeds"]'))[0];
+  const prev = document.getElementById("savePreview");
+  if (!budget && !area && !beds) { prev.innerHTML = `<span class="mp-label">Message preview</span>Fill in your details and preferences — the message I'll receive appears here.`; return; }
+  let msg = `Hi ${AGENT_NAME}, I'm ${name}.\n\nPlease save my search and let me know when something matches:\n`;
+  if (budget) msg += `• Budget: ${budget}\n`;
+  if (area) msg += `• Area: ${area}\n`;
+  if (beds) msg += `• Bedrooms: ${beds}\n`;
+  if (phone) msg += `\nMy WhatsApp: ${phone}\n`;
+  msg += `\nThanks!`;
+  prev.innerHTML = `<span class="mp-label">Message preview</span>` + msg.replace(/</g, "&lt;");
+}
+["saveName", "savePhone"].forEach(id => document.getElementById(id).addEventListener("input", buildSavePreview));
+document.querySelectorAll('[data-key="saveBudget"], [data-key="saveArea"], [data-key="saveBeds"]').forEach(g => g.addEventListener("chipchange", buildSavePreview));
+function sendSaveWhatsApp() {
+  const name = document.getElementById("saveName").value.trim();
+  if (!name) { showToast("Please enter your name"); return; }
+  buildSavePreview();
+  const msg = document.getElementById("savePreview").textContent.replace("Message preview", "").trim();
+  openWhatsApp(msg);
+  showToast("WhatsApp opened — save your search");
+}
+
+/* =========================================
+   RELOCATION QUIZ
+========================================= */
+const RELOC = [
+  { q: "Where are you moving from?", options: ["London", "Another UK city", "Abroad", "Already local"] },
+  { q: "When are you planning to move?", options: ["As soon as possible", "Within 3 months", "3–6 months", "Just exploring"] },
+  { q: "Who's moving with you?", options: ["Just me", "Me and my partner", "Family with children", "Family with pets"] },
+  { q: "What matters most to you?", options: ["Commute", "Schools", "Space", "Value for money"] },
+  { q: "What's your budget?", options: ["Under £300k", "£300k – £500k", "£500k – £750k", "£750k+"] },
+];
+let relocIdx = 0;
+let relocAnswers = [];
+function renderReloc() {
+  const step = document.getElementById("relocStep");
+  const q = document.getElementById("relocQ");
+  const opts = document.getElementById("relocOptions");
+  const bar = document.getElementById("relocBar");
+  if (relocIdx >= RELOC.length) {
+    step.textContent = "Complete";
+    q.textContent = "Your brief is ready ✓";
+    opts.innerHTML = `<p style="color:var(--muted);font-size:13px;line-height:1.6;">Your answers are on the right. Send them to me and I'll help you find the right area and the right home.</p><button class="btn btn-ghost btn-sm" style="margin-top:14px;" onclick="resetReloc()">Start Over</button>`;
+    bar.style.width = "100%";
+    buildRelocPreview();
+    return;
+  }
+  step.textContent = `Question ${relocIdx + 1} of ${RELOC.length}`;
+  q.textContent = RELOC[relocIdx].q;
+  bar.style.width = `${(relocIdx / RELOC.length) * 100}%`;
+  opts.innerHTML = "";
+  RELOC[relocIdx].options.forEach(opt => {
+    const b = document.createElement("button");
+    b.className = "reloc-option";
+    b.innerHTML = `<span>${opt}</span>`;
+    b.addEventListener("click", () => {
+      opts.querySelectorAll(".reloc-option").forEach(x => x.classList.remove("selected"));
+      b.classList.add("selected");
+      relocAnswers[relocIdx] = { q: RELOC[relocIdx].q, a: opt };
+      setTimeout(() => { relocIdx++; renderReloc(); }, 280);
+    });
+    opts.appendChild(b);
+  });
+}
+function buildRelocPreview() {
+  const prev = document.getElementById("relocPreview");
+  let msg = `Hi ${AGENT_NAME}, I'm relocating and would like your help:\n\n`;
+  relocAnswers.forEach(r => msg += `• ${r.q} ${r.a}\n`);
+  msg += `\nCould you suggest some areas and properties?\nThanks!`;
+  prev.innerHTML = `<span class="mp-label">Your relocation brief</span>` + msg.replace(/</g, "&lt;");
+}
+function resetReloc() { relocIdx = 0; relocAnswers = []; document.getElementById("relocPreview").innerHTML = `<span class="mp-label">Your relocation brief</span>Answer the questions on the left and your message to me will build here.`; renderReloc(); }
+function sendRelocWhatsApp() {
+  if (relocAnswers.length < RELOC.length) { showToast("Please complete all questions first"); return; }
+  let msg = `Hi ${AGENT_NAME}, I'm relocating and would like your help:\n\n`;
+  relocAnswers.forEach(r => msg += `• ${r.q} ${r.a}\n`);
+  msg += `\nCould you suggest some areas and properties?\nThanks!`;
+  openWhatsApp(msg);
+  showToast("WhatsApp opened — send your brief");
+}
+
+/* =========================================
+   VALUATION
+========================================= */
+function buildValuPreview() {
+  const name = document.getElementById("valuName").value.trim() || "A seller";
+  const address = document.getElementById("valuAddress").value.trim();
+  const type = document.getElementById("valuType").value;
+  const beds = document.getElementById("valuBeds").value;
+  const cond = document.getElementById("valuCondition").value;
+  const notes = document.getElementById("valuNotes").value.trim();
+  const prev = document.getElementById("valuPreview");
+  if (!address) { prev.innerHTML = `<span class="mp-label">Message preview</span>Fill in your property details and the message I'll receive appears here.`; return; }
+  let msg = `Hi ${AGENT_NAME}, I'm ${name}.\n\nI'd like a free valuation for:\n• ${address}\n• ${beds} bed ${type.toLowerCase()}\n• Condition: ${cond}\n`;
+  if (notes) msg += `\nNotes: ${notes}\n`;
+  msg += `\nWhen are you free?\nThanks!`;
+  prev.innerHTML = `<span class="mp-label">Message preview</span>` + msg.replace(/</g, "&lt;");
+}
+["valuName", "valuAddress", "valuType", "valuBeds", "valuCondition", "valuNotes"].forEach(id => document.getElementById(id).addEventListener("input", buildValuPreview));
+function sendValuationWhatsApp() {
+  const name = document.getElementById("valuName").value.trim();
+  const address = document.getElementById("valuAddress").value.trim();
+  if (!name) { showToast("Please enter your name"); return; }
+  if (!address) { showToast("Please enter the property address"); return; }
+  buildValuPreview();
+  const msg = document.getElementById("valuPreview").textContent.replace("Message preview", "").trim();
+  openWhatsApp(msg);
+  showToast("WhatsApp opened — request your valuation");
+}
+
+/* =========================================
+   QUICK REPLIES
+========================================= */
+const REPLIES = [
+  { title: "First reply to a new enquiry", text: `Hi [name], thanks for getting in touch — I'd be happy to help. When's a good time to chat or arrange a viewing?` },
+  { title: "Brochure / more details", text: `Hi [name], here are the full details for [property]. Let me know if you'd like to arrange a viewing — I can usually fit you in quickly.` },
+  { title: "Property under offer", text: `Hi [name], that one's just gone under offer — but I've got a few similar properties I think you'd like. Want me to send them over?` },
+  { title: "Confirming a viewing", text: `Hi [name], confirmed for [day/time] at [property]. I'll meet you there. If anything changes just let me know.` },
+  { title: "Following up after a viewing", text: `Hi [name], hope you enjoyed seeing [property]. Any questions I can answer, or would you like to see anything else?` },
+  { title: "Valuation follow-up", text: `Hi [name], thanks for the details about your property. I'd love to pop round and give you an honest valuation — when suits you?` },
+];
+
+function renderReplies() {
+  const grid = document.getElementById("repliesGrid");
+  grid.innerHTML = REPLIES.map((r, i) => `
+    <div class="reply-card glass">
+      <h4>${r.title}</h4>
+      <p class="reply-text">${r.text}</p>
+      <button class="reply-copy" data-i="${i}" onclick="copyReply(${i}, this)">Copy template</button>
+    </div>
+  `).join("");
+}
+function copyReply(i, btn) {
+  navigator.clipboard.writeText(REPLIES[i].text).then(() => {
+    btn.textContent = "Copied ✓";
+    btn.classList.add("copied");
+    showToast("Template copied");
+    setTimeout(() => { btn.textContent = "Copy template"; btn.classList.remove("copied"); }, 2000);
+  });
+}
+
+/* =========================================
+   SELLER TABS
+========================================= */
+document.querySelectorAll("#sellerTabs .ws-tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#sellerTabs .ws-tab").forEach(t => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
+    tab.classList.add("active"); tab.setAttribute("aria-selected", "true");
+    document.querySelectorAll("#agent-tools .ws-panel").forEach(p => p.classList.toggle("active", p.id === "panel-" + tab.dataset.tab));
+  });
+});
+
+/* =========================================
+   WORKSPACE TAB CLICKS
+========================================= */
+function bindWsTabs() {
+  document.querySelectorAll("#wsTabs .ws-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll("#wsTabs .ws-tab").forEach(t => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
+      tab.classList.add("active"); tab.setAttribute("aria-selected", "true");
+      document.querySelectorAll("#workspace .ws-panel").forEach(p => p.classList.toggle("active", p.id === "panel-" + tab.dataset.tab));
+      updateUrlState({ tab: tab.dataset.tab });
+    });
+  });
+}
+
+/* =========================================
+   INIT
+========================================= */
+renderToolCards();
+renderWsTabs();
+bindWsTabs();
+renderListings();
+renderShortlist();
+renderCompare();
+renderReplies();
+renderReloc();
+prefShowStep(0);
+</script>
+</body>
+</html>
