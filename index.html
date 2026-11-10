@@ -10,6 +10,8 @@
 <meta property="og:site_name" content="EstateFlow">
 <meta property="og:title" content="EstateFlow — Estate Agent Websites That Capture Real Leads">
 <meta property="og:description" content="A live demo of the real estate websites I build. Every tool sends a real WhatsApp message straight to the agent — no signups, no fake inbox.">
+<meta property="og:url" content="https://estateflow-rose.vercel.app/">
+<meta property="og:image" content="https://estateflow-rose.vercel.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="EstateFlow — a real estate website built by Arham Raza">
@@ -18,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EstateFlow — Estate Agent Websites That Capture Real Leads">
 <meta name="twitter:description" content="A live demo of the real estate websites I build. Every tool sends a real WhatsApp message straight to the agent.">
-<meta name="twitter:image" content="https://your-demo.vercel.app/og-image.png">
+<meta name="twitter:image" content="https://estateflow-rose.vercel.app/og-image.png">
 
 <meta name="theme-color" content="#0A0B0E">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230A0B0E'/><rect x='1.5' y='1.5' width='29' height='29' rx='6.5' fill='none' stroke='%23D4B483' stroke-width='1.2' stroke-opacity='0.35'/><path d='M16 6l9 7v12a1 1 0 0 1-1 1h-5v-8h-6v8H8a1 1 0 0 1-1-1V13z' fill='%23D4B483'/></svg>">
@@ -160,7 +162,6 @@ img { max-width: 100%; }
 }
 .demo-banner .b-demo-close:hover { color: var(--gold); border-color: rgba(212, 180, 131, 0.5); }
 
-/* Adjust fixed nav + body offset for banner height */
 body.has-demo-banner { padding-top: 42px; }
 body.has-demo-banner .navbar { top: 42px; }
 
@@ -749,6 +750,15 @@ footer { border-top: 1px solid var(--border); padding: 34px 0; position: relativ
 </style>
 </head>
 <body>
+<noscript>
+  <div style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:#0A0B0E;color:#F5F3EE;font-family:system-ui,sans-serif;text-align:center;line-height:1.6;">
+    <div style="max-width:420px;">
+      <div style="font-size:28px;font-weight:800;margin-bottom:14px;color:#D4B483;">EstateFlow</div>
+      <p style="font-size:15px;color:#9A968C;margin-bottom:22px;">This demo relies on JavaScript to work properly. Please enable JavaScript in your browser to try the live tools — or reach out directly.</p>
+      <a href="https://codifydev.vercel.app" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 24px;border-radius:10px;background:#D4B483;color:#0A0B0E;font-weight:700;text-decoration:none;">See more of my work ↗</a>
+    </div>
+  </div>
+</noscript>
 <!-- DEMO BANNER (Option A) -->
 <div class="demo-banner" id="demoBanner">
   <span class="b-demo-badge"><span class="b-demo-dot"></span>Live Demo</span>
@@ -1251,7 +1261,7 @@ footer { border-top: 1px solid var(--border); padding: 34px 0; position: relativ
 </section>
 
 <!-- FOOTER -->
- <!-- BUILT BY ARHAM — PITCH SECTION -->
+<!-- BUILT BY ARHAM — PITCH SECTION -->
 <section class="section" id="built-by" style="padding: 60px 0;">
   <div class="container reveal">
     <div class="cta-box glass" style="padding: 44px 40px;">
@@ -1311,7 +1321,13 @@ footer { border-top: 1px solid var(--border); padding: 34px 0; position: relativ
 ========================================= */
 
 /* --- WHATSAPP HELPERS --- */
-function waLink(msg) { return "https://wa.me/" + AGENT_WHATSAPP + "?text=" + encodeURIComponent(msg); }
+function waLink(msg) {
+  const PREFIX = `Hi ${AGENT_NAME} — I saw your estate agent demo site and I'd like one for my business.\n\n---\n\n`;
+  return "https://wa.me/" + AGENT_WHATSAPP + "?text=" + encodeURIComponent(PREFIX + msg);
+}
+function waLinkDirect(msg) {
+  return "https://wa.me/" + AGENT_WHATSAPP + "?text=" + encodeURIComponent(msg);
+}
 function openWhatsApp(msg) { window.open(waLink(msg), "_blank"); }
 function showToast(msg) {
   const c = document.getElementById("toast-container");
@@ -1320,6 +1336,39 @@ function showToast(msg) {
   t.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>${msg}</span>`;
   c.appendChild(t);
   setTimeout(() => { t.classList.add("out"); setTimeout(() => t.remove(), 320); }, 3200);
+}
+
+/* --- DEMO BANNER + PITCH --- */
+const DEMO_PITCH_MSG = `Hi ${AGENT_NAME} — I saw your estate agent demo site and I'd like one for my business.\n\nCould you tell me more about what you offer and how much it costs?`;
+
+document.body.classList.add("has-demo-banner");
+
+const demoEnquireLink = document.getElementById("demoEnquireLink");
+if (demoEnquireLink) {
+  demoEnquireLink.href = waLinkDirect(DEMO_PITCH_MSG);
+  demoEnquireLink.target = "_blank";
+  demoEnquireLink.rel = "noopener noreferrer";
+}
+
+const demoBanner = document.getElementById("demoBanner");
+const demoBannerClose = document.getElementById("demoBannerClose");
+if (sessionStorage.getItem("demoBannerDismissed") === "1" && demoBanner) {
+  demoBanner.classList.add("hidden");
+  document.body.classList.remove("has-demo-banner");
+}
+if (demoBannerClose) {
+  demoBannerClose.addEventListener("click", () => {
+    demoBanner.classList.add("hidden");
+    document.body.classList.remove("has-demo-banner");
+    sessionStorage.setItem("demoBannerDismissed", "1");
+  });
+}
+
+const builtByWaBtn = document.getElementById("builtByWaBtn");
+if (builtByWaBtn) {
+  builtByWaBtn.href = waLinkDirect(DEMO_PITCH_MSG);
+  builtByWaBtn.target = "_blank";
+  builtByWaBtn.rel = "noopener noreferrer";
 }
 
 /* --- NAV --- */
